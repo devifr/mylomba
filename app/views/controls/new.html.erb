@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Input Lomba</title>
+  <%= stylesheet_link_tag "controls", :media => "all" %>
+</head>
+<body>
+	<%= current_user.username %> 
+	<%= link_to 'Logout', destroy_user_session_path, :method => :delete %> 
+	<%= form_for :control,:url => {:action => :create} do |form| %>
+	<table align='center' width='50%' border="1">
+		<tr>
+			<td>Nama</td>
+			<td><%= form.hidden_field('user_id', :value => current_user.id) %>
+				<%= current_user.email %></option>
+				</td>
+		</tr>
+		<tr>
+			<td>Kategori</td>
+			<td><select name='category' class="input">
+				<option value="Sholat">Sholat</option>
+			</select></td>
+		</tr>
+		<tr>
+			<td>Berhasil</td>
+			<td>
+			<%= check_box(:berhasil,"",:value=>"asda") %> Shubuh
+			</td>
+		</tr>
+		<tr>
+			<td>Tanggal</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="2" align="right"><input type="button" name='kembali' class="button" value="Kembali" />
+				<input type="submit" name='Simpan' class="button" />
+		</td>
+		</tr>
+	</table>
+	<% end %>
+</body>
+</html>

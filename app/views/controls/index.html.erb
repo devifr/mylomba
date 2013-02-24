@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Lomba</title>
+</head>
+<body>
+<div id="tbl">
+<h3>Control Lomba</h3>
+<div style="margin-left:80%;margin-right:17%;" class="button"><%=link_to "Input", new_control_path %></div>
+	<div id="tablewrapper">
+		<div id="tableheader">
+   	  `<div class="search">
+          <select id="columns" onchange="sorter.search('query')"></select>
+          <input type="text" id="query" onkeyup="sorter.search('query')" />
+            </div>
+        <span class="details">
+				<div>Records <span id="startrecord"></span>-<span id="endrecord"></span> of <span id="totalrecords"></span></div>
+        		<div><a href="javascript:sorter.reset()">reset</a></div>
+        	</span>
+        </div>
+<table cellpadding="0" cellspacing="0" border="0" id="table" class="tinytable">
+ <thead>
+	<tr>
+		<th><h3>No</h3></th>
+		<th><h3>Tanggal</h3></th>
+		<th><h3>Nama</h3></th>
+		<th><h3>Kategori</h3></th>
+		<th><h3>Berhasil</h3></th>
+		<th><h3>Keterangan</h3></th>
+	</tr>
+</thead>
+	<tbody>
+	<%
+	@control.each do |c|
+	%>
+	<tr>
+		<td><%= c.id %></td>
+		<td><%= c.activity_date %></td>
+		<td><%= c.user_id %></td>
+		<td><%= c.category %></td>
+		<td><%= c.berhasil %></td>
+		<td>6</td>
+	</tr>
+	<% end %>
+</tbody>
+</table>
+<div id="tablefooter">
+          <div id="tablenav">
+            	<div>
+                    <%= image_tag('first.gif', :title => 'First', :alt => 'First', :width => '16', :height => '16', :onclick => "sorter.move(-1,true)") %>
+                    <%= image_tag('previous.gif', :title => 'Previous', :alt => 'Previous', :width => '16', :height => '16', :onclick => "sorter.move(-1)") %>
+                    <%= image_tag('next.gif', :title => 'Next', :alt => 'Next', :width => '16', :height => '16', :onclick => "sorter.move(1)") %>
+                    <%= image_tag('next.gif', :title => 'Next', :alt => 'Next', :width => '16', :height => '16', :onclick => "sorter.move(1,true)") %>
+                </div>
+                <div>
+                	<select id="pagedropdown"></select>
+				</div>
+                <div>
+                	<a href="javascript:sorter.showall()">view all</a>
+                </div>
+    </div>
+			<div id="tablelocation">
+            	<div>
+                    <select onchange="sorter.size(this.value)">
+                    <option value="5">5</option>
+                        <option value="10" selected="selected">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                    </select>
+                    <span>Entries Per Page</span>
+                </div>
+                <div class="page">Page <span id="currentpage"></span> of <span id="totalpages"></span></div>
+            </div>
+      </div>
+    </div>
+	<script type="text/javascript">
+	var sorter = new TINY.table.sorter('sorter','table',{
+		headclass:'head',
+		ascclass:'asc',
+		descclass:'desc',
+		evenclass:'evenrow',
+		oddclass:'oddrow',
+		evenselclass:'evenselected',
+		oddselclass:'oddselected',
+		paginate:true,
+		size:10,
+		colddid:'columns',
+		currentid:'currentpage',
+		totalid:'totalpages',
+		startingrecid:'startrecord',
+		endingrecid:'endrecord',
+		totalrecid:'totalrecords',
+		hoverid:'selectedrow',
+		pageddid:'pagedropdown',
+		navid:'tablenav',
+		sortcolumn:1,
+		sortdir:1,
+		sum:[8],
+		avg:[6,7,8,9],
+		columns:[{index:7, format:'%', decimals:1},{index:8, format:'$', decimals:0}],
+		init:true
+	});
+  </script>
+</body>
+</html>
